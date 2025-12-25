@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3473&amp;path=livereload" data-no-instant defer></script>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=11080&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>MyBatis 各个框架集成和性能对比 - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/">
+        <title>MyBatis 各个框架集成和性能对比 - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/">
   <meta property="og:site_name" content="蒋颖的世界">
   <meta property="og:title" content="MyBatis 各个框架集成和性能对比">
   <meta property="og:description" content="MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。">
@@ -13,16 +13,16 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2023-04-20T10:07:06+08:00">
     <meta property="article:modified_time" content="2023-04-20T10:07:06+08:00">
-    <meta property="og:image" content="http://localhost:3473/logo.png">
+    <meta property="og:image" content="http://localhost:11080/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:3473/logo.png">
+  <meta name="twitter:image" content="http://localhost:11080/logo.png">
   <meta name="twitter:title" content="MyBatis 各个框架集成和性能对比">
   <meta name="twitter:description" content="MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" /><link rel="prev" href="http://localhost:3473/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/" /><link rel="next" href="http://localhost:3473/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" /><link rel="prev" href="http://localhost:11080/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/" /><link rel="next" href="http://localhost:11080/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -32,9 +32,9 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http:\/\/localhost:3473\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/"
+            "@id": "http:\/\/localhost:11080\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/"
         },"genre": "posts","wordcount":  8817 ,
-        "url": "http:\/\/localhost:3473\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/","datePublished": "2023-04-20T10:07:06+08:00","dateModified": "2023-04-20T10:07:06+08:00","publisher": {
+        "url": "http:\/\/localhost:11080\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/","datePublished": "2023-04-20T10:07:06+08:00","dateModified": "2023-04-20T10:07:06+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -2726,7 +2726,7 @@
                             <a class="link-to-markdown" href="/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

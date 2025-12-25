@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-	<meta name="generator" content="Hugo 0.153.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3473&amp;path=livereload" data-no-instant defer></script>
+	<meta name="generator" content="Hugo 0.153.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=11080&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:3473/">
+        <title>蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:11080/">
   <meta property="og:site_name" content="蒋颖的世界">
   <meta property="og:title" content="蒋颖的世界">
   <meta property="og:description" content="这是我的全新 Hugo 网站">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="website">
-    <meta property="og:image" content="http://localhost:3473/logo.png">
+    <meta property="og:image" content="http://localhost:11080/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:3473/logo.png">
+  <meta name="twitter:image" content="http://localhost:11080/logo.png">
   <meta name="twitter:title" content="蒋颖的世界">
   <meta name="twitter:description" content="这是我的全新 Hugo 网站">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:3473/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="蒋颖的世界">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:11080/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="蒋颖的世界">
     <link rel="feed" href="/index.xml" type="application/rss+xml" title="蒋颖的世界"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "http:\/\/localhost:3473\/","inLanguage": "zh-CN","author": {
+        "url": "http:\/\/localhost:11080\/","inLanguage": "zh-CN","author": {
                 "@type": "Person",
                 "name": "蒋颖"
             },"description": "这是我的全新 Hugo 网站","name": "蒋颖的世界"
@@ -93,7 +93,9 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/" title="主页"><img
+                <div class="container"><div class="page-layout pop-box">
+        <div class="petals-container"></div>
+        <div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/" title="主页"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="https://crry-assist.oss-cn-chengdu.aliyuncs.com/Screenshot/%E5%8D%9A%E5%AE%A2%E5%A4%B4%E5%83%8F.png"
@@ -153,7 +155,91 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>蒋颖</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-06-18">2022-06-18</time></span></div><div class="content"><h2 id="概速">概速</h2>
 <p>在现实项目中，我们往往会遇到需要使用多个 Redis 数据源的场景。本文介绍的是一种高度定制化的方案。每个独立的数据源都会使用自己的配置，其中包括针对该数据源的连接池配置。</p></div><div class="post-footer">
         <a href="/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/">阅读全文</a></div>
-</article></div></div>
+</article></div>
+    </div>
+    <style>
+         
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .petal {
+            position: absolute;
+            top: -50px;
+            opacity: 0.7;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(45deg);
+            animation: petal-fall 15s linear infinite;
+        }
+        
+        @keyframes petal-fall {
+            0% {
+                transform: translate(0, -50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(var(--end-x), 100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+    
+    <script>
+        
+        function initPetals(container, count = 400) {
+            for (let i = 0; i < count; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                
+                petal.style.left = Math.random() * 100 + '%';
+                
+                
+                const size = 10 + Math.random() * 10;
+                petal.style.width = size + 'px';
+                petal.style.height = size + 'px';
+                
+                
+                const hue = 300 + Math.random() * 60; 
+                petal.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%), hsl(${hue}, 100%, 65%))`;
+                
+                
+                const endX = (Math.random() - 0.5) * 200;
+                const duration = 8 + Math.random() * 10; 
+                const delay = Math.random() * 5;
+                
+                petal.style.setProperty('--end-x', endX + 'px');
+                petal.style.animation = `petal-fall ${duration}s linear ${delay}s infinite`;
+                
+                container.appendChild(petal);
+            }
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.pop-box .petals-container');
+            if (container) {
+                initPetals(container, 400);
+            }
+        });
+    </script></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">我的世界我做主</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">蒋颖</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>

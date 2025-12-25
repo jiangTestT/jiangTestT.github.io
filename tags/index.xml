@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 蒋颖的世界</title>
-    <link>http://localhost:3473/tags/</link>
+    <link>http://localhost:11080/tags/</link>
     <description>Recent content in Tags on 蒋颖的世界</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <managingEditor>1663402304@qq.com (蒋颖)</managingEditor>
     <webMaster>1663402304@qq.com (蒋颖)</webMaster>
-    <atom:link href="http://localhost:3473/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:11080/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
