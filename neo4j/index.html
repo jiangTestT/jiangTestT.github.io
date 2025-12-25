@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3473&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Neo4j文档 - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:3473/neo4j/">
+  <meta property="og:site_name" content="蒋颖的世界">
+  <meta property="og:title" content="Neo4j文档">
+  <meta property="og:description" content="特点 节点 节点和关系都包含属性 关系链接节点 属性是键值对 节点用圆圈表示，关系用方向键表示 关系有方向：单向和双向 每个关系包含&#34;开始节点&#34;和&#34;到节点&#34;或&#34;结束节点&#34;">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-20T16:07:06+08:00">
+    <meta property="article:modified_time" content="2024-03-20T16:07:06+08:00">
+    <meta property="og:image" content="http://localhost:3473/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:3473/logo.png">
+  <meta name="twitter:title" content="Neo4j文档">
+  <meta name="twitter:description" content="特点 节点 节点和关系都包含属性 关系链接节点 属性是键值对 节点用圆圈表示，关系用方向键表示 关系有方向：单向和双向 每个关系包含&#34;开始节点&#34;和&#34;到节点&#34;或&#34;结束节点&#34;">
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:3473/neo4j/" /><link rel="prev" href="http://localhost:3473/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" /><link rel="next" href="http://localhost:3473/zookeeper/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Neo4j文档",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:3473\/neo4j\/"
+        },"genre": "posts","wordcount":  4451 ,
+        "url": "http:\/\/localhost:3473\/neo4j\/","datePublished": "2024-03-20T16:07:06+08:00","dateModified": "2024-03-20T16:07:06+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "蒋颖"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="蒋颖的世界"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="蒋颖的世界"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Neo4j文档</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>蒋颖</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-20">2024-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4451 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#特点">特点</a></li>
+    <li><a href="#主要元素">主要元素</a></li>
+    <li><a href="#基础语法">基础语法</a>
+      <ul>
+        <li><a href="#创建">创建</a></li>
+        <li><a href="#查询">查询</a></li>
+        <li><a href="#删除">删除</a></li>
+        <li><a href="#更新">更新</a></li>
+        <li><a href="#merge">Merge</a></li>
+        <li><a href="#with">With</a></li>
+        <li><a href="#unwind展开列表">Unwind展开列表</a></li>
+        <li><a href="#call执行子查询">Call执行子查询</a></li>
+        <li><a href="#foreach">Foreach</a></li>
+        <li><a href="#index索引">Index索引</a></li>
+        <li><a href="#unique约束">Unique约束</a></li>
+        <li><a href="#断言函数">断言函数</a></li>
+        <li><a href="#标量函数">标量函数</a></li>
+        <li><a href="#字符串函数">字符串函数</a></li>
+        <li><a href="#数值函数">数值函数</a></li>
+        <li><a href="#导入csv文件">导入CSV文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#时间函数">时间函数</a>
+      <ul>
+        <li><a href="#获取时间">获取时间</a></li>
+        <li><a href="#创建时间">创建时间</a></li>
+        <li><a href="#分割时间">分割时间</a></li>
+      </ul>
+    </li>
+    <li><a href="#特殊查询">特殊查询</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="特点">特点</h2>
+<p>节点
+节点和关系都包含属性
+关系链接节点
+属性是键值对
+节点用圆圈表示，关系用方向键表示
+关系有方向：单向和双向
+每个关系包含&quot;开始节点&quot;和&quot;到节点&quot;或&quot;结束节点&quot;</p>
+<h2 id="主要元素">主要元素</h2>
+<p>节点，属性，关系，标签，数据浏览器</p>
+<h2 id="基础语法">基础语法</h2>
+<h3 id="创建">创建</h3>
+<p><code>CREATE</code>：创建节点、关系和属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="n">create节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="p">(:</span><span class="n">student</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;小明&#34;</span><span class="err">}</span><span class="w"> </span><span class="p">),(:</span><span class="n">student</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;小红&#34;</span><span class="err">}</span><span class="w"> </span><span class="p">),(:</span><span class="n">student</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;张三&#34;</span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">建立关系</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;小明&#34;</span><span class="err">}</span><span class="p">),(</span><span class="n">m</span><span class="p">:</span><span class="n">student</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;小红&#34;</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="err">同学</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">city</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">city_relation</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="n">city</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">code</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">subCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">code</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="o">`</span><span class="err">属于</span><span class="o">`</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">subName</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查询">查询</h3>
+<p><code>MATCH</code>：检索有关节点、关系和属性</p>
+<p><code>ORDER BY </code>：排序检索数据</p>
+<p><code>RETURN</code>：返回查询结果</p>
+<p><code>WHERE</code>：提供条件过滤检索数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">查询</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">25</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">查询关系</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">relation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="o">`</span><span class="err">同学</span><span class="o">`</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">()</span><span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="n">relation</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>查询两节点的之间的最短路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">match</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shortestpath</span><span class="p">((</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="o">*</span><span class="mi">0</span><span class="p">..</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;刘备&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;刘禅&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>查询两节点的之间所有的最短路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">match</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allshortestpaths</span><span class="p">((</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="o">*</span><span class="mi">0</span><span class="p">..</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;刘备&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;刘禅&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="删除">删除</h3>
+<p><code>DELETE</code>：删除节点和关系</p>
+<p><code>REMOVE</code>：删除节点和关系的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">移除属性</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;小明&#34;</span><span class="w"> </span><span class="n">REMOVE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">sex</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">删除节点，删除节点前必须删除关系</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="n">n</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">删除关系</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;小明&#34;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;小红&#34;</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="n">r</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="更新">更新</h3>
+<p><code>SET</code>：添加或更新标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">设置属性</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;小明&#34;</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="merge">Merge</h3>
+<p><code>MERGE</code> 语句非常适用于在插入或更新数据时进行模式匹配，它可以确保数据的一致性，同时避免重复创建相同的节点或关系。</p>
+<p><code>MERGE</code> 语句用于根据指定的模式进行创建或匹配节点和关系。如果节点或关系不存在时，创建它们，已存在时则进行匹配。</p>
+<p><strong>创建或匹配节点：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">不存在时，创建；存在时，匹配（必须全部属性匹配）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;123456789&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">如果存在数据，删除</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;18784417369&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="n">p</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">复杂查询</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">relation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="w"> </span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">Freid</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="w"> </span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">KNOWS</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">p3</span><span class="p">:</span><span class="w"> </span><span class="n">person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">relation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">创建无向链接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">:</span><span class="n">Person</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="w"> </span><span class="err">}</span><span class="p">),(</span><span class="n">h</span><span class="p">:</span><span class="n">Person</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;王五&#39;</span><span class="w"> </span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">KNOWS</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>创建或匹配带有多个标签的节点：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">这个查询会检查是否已经存在一个带有</span><span class="w"> </span><span class="s2">&#34;person&#34;</span><span class="err">和</span><span class="w"> </span><span class="s2">&#34;man&#34;</span><span class="err">标签且属性为以下所示的节点。如果不存在，则创建一个新节点。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="p">:</span><span class="n">man</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;123456789&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>创建或匹配关系及相关节点：</strong></p>
+<p>这个查询会首先检查是否已经存在两个具有 &ldquo;Person&rdquo; 标签的节点。然后它会检查两者是否有 &ldquo;FRIEND&rdquo; 关系，将这两个节点连接起来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="n">person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;21&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;987654321&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;lisi@qq.com&#39;</span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">:</span><span class="n">person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;123456789&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">Freid</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>条件性创建或匹配：</strong></p>
+<p>这个查询会检查是否已经存在一个具有 &ldquo;Person&rdquo; 标签且属性满足以下所示的节点。如果不存在，则创建一个新节点并设置 &ldquo;age&rdquo; 属性为 18。如果已存在，则更新 &ldquo;phone&rdquo; 属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">MERGE</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;123456789&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ON</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;18&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ON</span><span class="w"> </span><span class="k">MATCH</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">phone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;147852369&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="with">With</h3>
+<p><code>with</code>字句定义作用域变量，把with后面结果集当成一个查询结果、在这个结果基础上再做where条件的筛选或者候选的查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;刘备&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="err">兄弟</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">people_count</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">people_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">people_count</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在with语句后，提前使用limit，限制查询的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;蜀&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="c1">-- (m:Person) 
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">COLLECT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">mName</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">mName</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unwind展开列表">Unwind展开列表</h3>
+<p><code>unwind</code>为列表的每个元素返回一行，如：某节点有个属性为列表，UNWIND将列表中的元素迭代，每个元素返回一个结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;刘备&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;孙权&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;曹操&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">names</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">UNWIND</span><span class="w"> </span><span class="k">names</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">name</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">p</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="call执行子查询">Call执行子查询</h3>
+<p>子查询是一组在其自己的范围内执行的 Cypher 语句。<strong>子查询通常从外部封闭查询调用。使用子查询，可以限制需要处理的行数。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CALL</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="k">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;蜀&#34;</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">p1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="err">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="err">兄弟</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">p2</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="foreach">Foreach</h3>
+<p>循环操作，常用于批量更新节点的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">更新</span><span class="o">/</span><span class="err">新增子节点的属性</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">city</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="o">`</span><span class="err">属于</span><span class="o">`</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">city</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;广东省&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">FOREACH</span><span class="w"> </span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nodes</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">marked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;9527&#39;</span><span class="p">)</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="index索引">Index索引</h3>
+<p>使用<code>INDEX</code>创建或者删除索引</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">创建索引</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">删除索引</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unique约束">Unique约束</h3>
+<p>避免创建重复的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">创建约束</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">personal</span><span class="p">)</span><span class="w"> </span><span class="n">assert</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">unique</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">删除约束</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">personal</span><span class="p">)</span><span class="w"> </span><span class="n">assert</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">unique</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="断言函数">断言函数</h3>
+<p><code>all</code>，用于判断list中的所有元素，是否满足where条件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">all</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="err">返回</span><span class="k">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">all</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="err">返回</span><span class="k">false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>any</code>，用于判断list中，是否存在一个满足where条件的元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">any</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">        </span><span class="o">//</span><span class="err">返回</span><span class="k">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">any</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="k">null</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="err">返回</span><span class="k">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">any</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">   </span><span class="o">//</span><span class="err">返回</span><span class="k">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>exist</code>，用于判断，是否存在某个属性或者关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="k">exists</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">exists</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">LIVE_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">())</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">live</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>none</code>，用于判断list中的每一个元素，是否都不满足where条件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">none</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="err">返回</span><span class="k">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">none</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="o">//</span><span class="err">返回</span><span class="k">null</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>single</code>，用于判断list中，只有一个元素满足条件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">single</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="k">null</span><span class="p">]</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="mi">2</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">//</span><span class="err">返回</span><span class="k">null</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="标量函数">标量函数</h3>
+<p><code>coalesce</code>，返回参数中第一个不为null的值，如果都为null，则返回null。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">coalesce</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>startNode</code>：用于知道关系的开始节点</p>
+<p><code>endNode</code>：用于知道关系的结束节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">LIVE_IN</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">()</span><span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="n">startNode</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">endNode</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>id</code>：用于知道关系的ID</p>
+<p><code>type</code>：用于知道字符串表示种的一个关系的TYPE</p>
+<p><code>labels</code>：用于返回节点的标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">LIVE_IN</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">()</span><span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>head</code>：返回list的第一个元素</p>
+<p><code>last</code>：返回list的最后一个元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">head</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="k">null</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="w">   </span><span class="o">//</span><span class="err">返回</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">head</span><span class="p">([])</span><span class="w">   </span><span class="o">//</span><span class="err">返回</span><span class="k">null</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>randomUUID</code>：用于随机生成长度为32的唯一uuid</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">(</span><span class="n">randomuuid</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>length</code>：返回路径的长度</p>
+<p>length也可以用于计算string、list、pattern的长度，但是强烈建议只对path使用length，对其它类型长度的计算功能，后续可能被丢弃。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">relation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="o">*</span><span class="mi">1</span><span class="p">..</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="n">relation</span><span class="p">,</span><span class="w"> </span><span class="k">length</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>size</code>：用法根据参数的类型确定</p>
+<p>size(string)：表示字符串中字符的数量，可以把字符串当作是字符的列表。</p>
+<p>size(list)：返回列表中元素的数量。</p>
+<p>size(pattern_expression)：也是统计列表中元素的数量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">relation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="o">*</span><span class="mi">1</span><span class="p">..</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">size</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">name</span><span class="p">),</span><span class="w"> </span><span class="k">size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="k">null</span><span class="p">,</span><span class="mi">4</span><span class="p">]),</span><span class="w"> </span><span class="k">size</span><span class="p">((</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="c1">--&gt; ())
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">person</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;王五&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">size</span><span class="p">((</span><span class="n">p2</span><span class="p">)</span><span class="w"> </span><span class="c1">--&gt; (p1))
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">size</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="k">null</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="w"> </span><span class="o">//</span><span class="err">返回</span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="err">下属</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">size</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">m</span><span class="p">))</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>properties</code>：用于返回节点或者关系的全部属性</p>
+<p><code>timestamp</code>：用于返回当前的时间戳</p>
+<h3 id="字符串函数">字符串函数</h3>
+<p><code>left</code>和<code>right</code>，用于获取字符串左边/右边，规定长度的子字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">left</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>ltrim、rtrim、trim</code>，去除字符串左边、右边、两边的空格</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">ltrim</span><span class="p">(</span><span class="s2">&#34; Hello Word &#34;</span><span class="p">),</span><span class="w"> </span><span class="n">rtrim</span><span class="p">(</span><span class="s2">&#34; Hello Word &#34;</span><span class="p">),</span><span class="w"> </span><span class="k">trim</span><span class="p">(</span><span class="s2">&#34; Hello Word &#34;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>replace</code>：replace(original, search, replace)，使用replace替换original中的所有search字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">replace</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>reverse</code>：字符串翻转</p>
+<p><code>split</code>：字符串拆分</p>
+<p><code>substring</code>：字符串切割</p>
+<p><code>toLower、toUpper</code>：用于字符串的大小写转换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">phone</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">substring</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">toUpper</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">toUpper</span><span class="p">(</span><span class="s1">&#39;Jerry&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">toLower</span><span class="p">(</span><span class="s1">&#39;Jerry&#39;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>contains</code>：判断字符串是否包含另一个字符串，注意区分大小写</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="s1">&#39;Hello Word&#39;</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s1">&#39;Hello&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>nodes</code>：用于返回路径上的所有节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">relation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="w"> </span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">LIVE_IN</span><span class="p">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="k">location</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">nodes</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="c1">--&gt;(b)--&gt;(c) 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">nodes</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>relationships</code>：返回路径上的所有关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="c1">--&gt;(b)--&gt;(c) 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">relationships</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">nodes</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>reduce</code>：返回每个元素作用于表达式上的结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="c1">--&gt;(b)--&gt;(c) 
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;李四&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">reduce</span><span class="p">(</span><span class="n">totalAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">nodes</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">totalAge</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">reduction</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用正则表达式进行匹配</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="s1">&#39;Hello Word&#39;</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s1">&#39;Hello.*&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="数值函数">数值函数</h3>
+<p><code>abs</code>：取绝对值</p>
+<p><code>floor</code>：向下取整</p>
+<p><code>ceil</code>：向上取整</p>
+<p><code>round</code>：四舍五入</p>
+<p><code>rand</code>：返回一个（0, 1）的随机数</p>
+<p><code>sign</code>：返回数值的正负，如果值为零，则返回0。如果值为负数，则返回-1。如果值为正数，返回1。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">101</span><span class="p">),</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">ceil</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">rand</span><span class="p">(),</span><span class="w"> </span><span class="n">sign</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">sign</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">sign</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="导入csv文件">导入CSV文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">导入</span><span class="n">csv文件并创建节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">load</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="s2">&#34;file:///city.csv&#34;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">row</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">city</span><span class="w"> </span><span class="err">{</span><span class="n">code</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">administrativeDivision</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">load</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="s2">&#34;file:///city_relation.csv&#34;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">row</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">city_relation</span><span class="w"> </span><span class="err">{</span><span class="n">code</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">subCode</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">subName</span><span class="p">:</span><span class="k">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="时间函数">时间函数</h2>
+<p>date格式：<code>yyyy-mm-dd</code></p>
+<p>datetime格式：<code>yyyy-mm-ddThh:MM:SS:sssZ</code></p>
+<p>localdatetime格式：<code>yyyy-mm-ddThh:MM:SS:sss</code></p>
+<p>localtime格式：<code>hh:MM:SS.sss</code></p>
+<p>time格式：<code>hh:MM:SS.sssZ</code></p>
+<h3 id="获取时间">获取时间</h3>
+<p>获取当前时间，可以指定时区</p>
+<ul>
+<li><code>date([{timezone}])</code></li>
+<li><code>datetime([{timezone}])</code></li>
+<li><code>localdatetime([{timezone}])</code></li>
+<li><code>localtime([{timezone}])</code></li>
+<li><code>time([{timezone}])</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="n">timezone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;America/Los Angeles&#39;</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用transaction时返回当前时间。对于同一事务中的每次调用，该值都是相同的</p>
+<ul>
+<li><code>date.transaction([{timezone}])</code></li>
+<li><code>datetime.transaction([{timezone}])</code></li>
+<li><code>localdatetime.transaction([{timezone}])</code></li>
+<li><code>localtime.transaction([{timezone}])</code></li>
+<li><code>time.transaction([{timezone}])</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">.</span><span class="k">transaction</span><span class="p">()</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用statement返回当前时间。对于同一语句中的每次调用，该值都相同。但是，同一事务中的不同语句可能会产生不同的值</p>
+<ul>
+<li><code>date.statement([{timezone}])</code></li>
+<li><code>datetime.statement([{timezone}])</code></li>
+<li><code>localdatetime.statement([{timezone}])</code></li>
+<li><code>localtime.statement([{timezone}])</code></li>
+<li><code>time.statement([{timezone}])</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">.</span><span class="k">statement</span><span class="p">()</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用时间返回当前值realtime。该值将是系统的实时时钟</p>
+<ul>
+<li><code>date.realtime([{timezone}])</code></li>
+<li><code>datetime.realtime([{timezone}])</code></li>
+<li><code>localdatetime.realtime([{timezone}])</code></li>
+<li><code>localtime.realtime([{timezone}])</code></li>
+<li><code>time.realtime([{timezone}])</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">.</span><span class="n">realtime</span><span class="p">()</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建时间">创建时间</h3>
+<p>以<strong>年-月-日</strong>的格式创建时间</p>
+<ul>
+<li><code>date({year [, month, day]})</code></li>
+<li><code>datetime({year [, month, day, hour, minute, second, millisecond, microsecond, nanosecond, timezone]})</code></li>
+<li><code>localdatetime({year [, month, day, hour, minute, second, millisecond, microsecond, nanosecond]})</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以<strong>年-周-日</strong>的格式创建时间</p>
+<ul>
+<li><code>date({year [, week, dayOfWeek]})</code></li>
+<li><code>datetime({year [, week, dayOfWeek, hour, minute, second, millisecond, microsecond, nanosecond, timezone]})</code></li>
+<li><code>localdatetime({year [, week, dayOfWeek, hour, minute, second, millisecond, microsecond, nanosecond]})</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="n">week</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="n">dayOfWeek</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以<strong>年-季度-日</strong>的格式创建时间</p>
+<ul>
+<li><code>date({year [, quarter, dayOfQuarter]})</code></li>
+<li><code>datetime({year [, quarter, dayOfQuarter, hour, minute, second, millisecond, microsecond, nanosecond, timezone]})</code></li>
+<li><code>localdatetime({year [, quarter, dayOfQuarter, hour, minute, second, millisecond, microsecond, nanosecond]})</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="n">quarter</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">dayOfQuarter</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以<strong>年-日</strong>的格式创建时间</p>
+<ul>
+<li><code>date({year [, ordinalDay]})</code></li>
+<li><code>datetime({year [, ordinalDay, hour, minute, second, millisecond, microsecond, nanosecond, timezone]})</code></li>
+<li><code>localdatetime({year [, ordinalDay, hour, minute, second, millisecond, microsecond, nanosecond]})</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="n">ordinalDay</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据字符串创建时间</p>
+<ul>
+<li><code>date(temporalValue)</code></li>
+<li><code>datetime(temporalValue)</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;2024-04-24&#39;</span><span class="p">),</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;2024-04&#39;</span><span class="p">),</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;202404&#39;</span><span class="p">),</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;2024-W17-3&#39;</span><span class="p">),</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;20240424&#39;</span><span class="p">),</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;2024&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015-07-21T21:40:32.142+0100&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015-W30-2T214032.142Z&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015T214032-0100&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;20150721T21:40-01:30&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015-W30T2140-02&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015202T21+18:00&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015-07-21T21:40:32.142[Europe/London]&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   </span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2015-07-21T21:40:32.142-04[America/New_York]&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	   
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">localdatetime</span><span class="p">(</span><span class="s1">&#39;2015-07-21T21:40:32.142&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="n">localdatetime</span><span class="p">(</span><span class="s1">&#39;2015-W30-2T214032.142&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="n">localdatetime</span><span class="p">(</span><span class="s1">&#39;2015-202T21:40:32&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="n">localdatetime</span><span class="p">(</span><span class="s1">&#39;2015202T21&#39;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据时间戳创建时间</p>
+<ul>
+<li><code>datetime({ epochSeconds | epochMillis })</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">##</span><span class="w"> </span><span class="err">注意，这里默认的时区是</span><span class="n">UTC协调世界时</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="n">epochSeconds</span><span class="p">:</span><span class="w"> </span><span class="k">timestamp</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">nanosecond</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="n">epochMillis</span><span class="p">:</span><span class="w"> </span><span class="mi">1713950965318</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用其他时间格式创建另一种时间格式的时间</p>
+<ul>
+<li><code>date({date [, year, month, day, week, dayOfWeek, quarter, dayOfQuarter, ordinalDay]})</code></li>
+<li><code>datetime({datetime [, year, ..., timezone]}) | datetime({date [, year, ..., timezone]}) | datetime({time [, year, ..., timezone]}) | datetime({date, time [, year, ..., timezone]})</code></li>
+<li><code>localdatetime({datetime [, year, ..., nanosecond]}) | localdatetime({date [, year, ..., nanosecond]}) | localdatetime({time [, year, ..., nanosecond]}) | localdatetime({date, time [, year, ..., nanosecond]})</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">UNWIND</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">1984</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="err">}</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">localdatetime</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">1984</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="k">minute</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="k">second</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="err">}</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">1984</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">timezone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;+01:00&#39;</span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dd</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">dd</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dateOnly</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">dd</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dateDay</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="err">{</span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">1984</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">dd</span><span class="p">,</span><span class="w"> </span><span class="n">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">minute</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">second</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dateHHMMSS</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">dd</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="n">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">minute</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">second</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">timezone</span><span class="p">:</span><span class="s1">&#39;Pacific/Honolulu&#39;</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dateDDHHMMSSTimezone</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="分割时间">分割时间</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="n">datetime</span><span class="p">(</span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">year</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="k">minute</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="k">second</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="n">nanosecond</span><span class="p">:</span><span class="w"> </span><span class="mi">645876123</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">timezone</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;+01:00&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;millennium&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncMillenium</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;century&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncCentury</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;decade&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">truncDecade</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="k">day</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">truncYear</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;weekYear&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncWeekYear</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;quarter&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncQuarter</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncMonth</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="n">dayOfWeek</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncWeek</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nb">date</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncDay</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncHour</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;minute&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncMinute</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncSecond</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;millisecond&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncMillisecond</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">datetime</span><span class="p">.</span><span class="k">truncate</span><span class="p">(</span><span class="s1">&#39;microsecond&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">truncMicrosecond</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="特殊查询">特殊查询</h2>
+<p>无向关系的查询，在Neo4J中，关系的创建不能是无向的，但是查询和使用可以，因此可以这样查询和修改关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="err">兄弟</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">Person</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURN</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">m</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-03-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/neo4j/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:3473/neo4j/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:3473/neo4j/" data-title="Neo4j文档"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:3473/neo4j/" data-title="Neo4j文档"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:3473/neo4j/" data-title="Neo4j文档"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" class="prev" rel="prev" title="Kubernetes 的注册中心和配置中心(Etcd))"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes 的注册中心和配置中心(Etcd))</a>
+            <a href="/zookeeper/" class="next" rel="next" title="认识 Zookeeper">认识 Zookeeper<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.153.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">蒋颖</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

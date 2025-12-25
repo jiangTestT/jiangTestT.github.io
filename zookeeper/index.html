@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3473&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>认识 Zookeeper - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:3473/zookeeper/">
+  <meta property="og:site_name" content="蒋颖的世界">
+  <meta property="og:title" content="认识 Zookeeper">
+  <meta property="og:description" content="初识 Zookeeper ZooKeeper 概念 Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。 Zookeeper 翻译过来就是 动物园管理员，他是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小猪)的管理员。简称zk Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。 Zookeeper 提供的主要功能包括： 配置管理 分布式锁 集群管理 Zookeeper 数据模型 ZooKeeper 是一个树形目录服务,其数据模型和Unix的文件系统目录树很类似，拥有一个层次化结构。 这里面的每一个节点都被称为： ZNode，每个节点上都会保存自己的数据和节点信息。 节点可以拥有子节点，同时也允许少量（1MB）数据存储在该节点之下。 节点可以分为四大类：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-12T17:07:06+08:00">
+    <meta property="article:modified_time" content="2024-09-12T17:07:06+08:00">
+    <meta property="og:image" content="http://localhost:3473/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:3473/logo.png">
+  <meta name="twitter:title" content="认识 Zookeeper">
+  <meta name="twitter:description" content="初识 Zookeeper ZooKeeper 概念 Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。 Zookeeper 翻译过来就是 动物园管理员，他是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小猪)的管理员。简称zk Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。 Zookeeper 提供的主要功能包括： 配置管理 分布式锁 集群管理 Zookeeper 数据模型 ZooKeeper 是一个树形目录服务,其数据模型和Unix的文件系统目录树很类似，拥有一个层次化结构。 这里面的每一个节点都被称为： ZNode，每个节点上都会保存自己的数据和节点信息。 节点可以拥有子节点，同时也允许少量（1MB）数据存储在该节点之下。 节点可以分为四大类：">
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:3473/zookeeper/" /><link rel="prev" href="http://localhost:3473/neo4j/" /><link rel="next" href="http://localhost:3473/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "认识 Zookeeper",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:3473\/zookeeper\/"
+        },"genre": "posts","wordcount":  3130 ,
+        "url": "http:\/\/localhost:3473\/zookeeper\/","datePublished": "2024-09-12T17:07:06+08:00","dateModified": "2024-09-12T17:07:06+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "蒋颖"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="蒋颖的世界"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="蒋颖的世界"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">认识 Zookeeper</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>蒋颖</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-12">2024-09-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3130 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#初识-zookeeper">初识 Zookeeper</a>
+      <ul>
+        <li><a href="#zookeeper-概念">ZooKeeper 概念</a></li>
+        <li><a href="#zookeeper-数据模型">Zookeeper 数据模型</a></li>
+        <li><a href="#docker安装zookeeper">Docker安装Zookeeper</a></li>
+      </ul>
+    </li>
+    <li><a href="#zookeeper-javaapi-操作">ZooKeeper JavaAPI 操作</a>
+      <ul>
+        <li><a href="#curator-介绍">Curator 介绍</a></li>
+        <li><a href="#curator-api-常用操作">Curator API 常用操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#zookeeper服务注册与发现">Zookeeper服务注册与发现</a></li>
+    <li><a href="#zookeeper的分布式配置中心与监控">Zookeeper的分布式配置中心与监控</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="初识-zookeeper">初识 Zookeeper</h2>
+<h3 id="zookeeper-概念">ZooKeeper 概念</h3>
+<ul>
+<li>Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。</li>
+<li>Zookeeper 翻译过来就是 动物园管理员，他是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小猪)的管理员。简称zk</li>
+<li>Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。</li>
+<li>Zookeeper 提供的主要功能包括：
+<ul>
+<li>配置管理</li>
+<li>分布式锁</li>
+<li>集群管理</li>
+</ul>
+</li>
+</ul>
+<h3 id="zookeeper-数据模型">Zookeeper 数据模型</h3>
+<p>ZooKeeper 是一个树形目录服务,其数据模型和Unix的文件系统目录树很类似，拥有一个层次化结构。
+这里面的每一个节点都被称为： ZNode，每个节点上都会保存自己的数据和节点信息。
+节点可以拥有子节点，同时也允许少量（1MB）数据存储在该节点之下。
+节点可以分为四大类：</p>
+<ul>
+<li>持久化节点（PERSISTENT）</li>
+<li>临时节点（EPHEMERAL）：-e</li>
+<li>持久化顺序节点（PERSISTENT_SEQUENTIAL）：-s</li>
+<li>临时顺序节点（EPHEMERAL_SEQUENTIAL）：-es</li>
+</ul>
+<h3 id="docker安装zookeeper">Docker安装Zookeeper</h3>
+<ol>
+<li>
+<p>查看本地镜像和检索拉取Zookeeper 镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="o">#</span> <span class="err">查看本地镜像</span>
+</span></span><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">images</span>
+</span></span><span class="line"><span class="cl"><span class="o">#</span> <span class="err">检索</span><span class="n">ZooKeeper</span> <span class="err">镜像</span>
+</span></span><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">search</span> <span class="n">zookeeper</span>
+</span></span><span class="line"><span class="cl"><span class="o">#</span> <span class="err">拉取</span><span class="n">ZooKeeper镜像最新版本</span>
+</span></span><span class="line"><span class="cl"><span class="n">docker</span> <span class="n">pull</span> <span class="n">zookeeper</span><span class="p">:</span><span class="n">latest</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>创建ZooKeeper 挂载目录（数据挂载目录、配置挂载目录和日志挂载目录）</p>
+<p>mkdir -p /mydata/zookeeper/data # 数据挂载目录
+mkdir -p /mydata/zookeeper/conf # 配置挂载目录
+mkdir -p /mydata/zookeeper/logs # 日志挂载目录</p>
+</li>
+<li>
+<p>启动ZooKeeper容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl">docker run -d --name zookeeper --privileged<span class="o">=</span><span class="nb">true</span> -p 2181:2181  -v D:/Software/Docker/Zookeeper/data:/data -v D:/Software/Docker/Zookeeper/conf:/conf -v D:/Software/Docker/Zookeeper/logs:/datalog zookeeper:latest<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数说明</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">-e TZ=&#34;Asia/Shanghai&#34; # 指定上海时区 
+</span></span><span class="line"><span class="cl">-d # 表示在一直在后台运行容器
+</span></span><span class="line"><span class="cl">-p 2181:2181 # 对端口进行映射，将本地2181端口映射到容器内部的2181端口
+</span></span><span class="line"><span class="cl">--name # 设置创建的容器名称
+</span></span><span class="line"><span class="cl">-v # 将本地目录(文件)挂载到容器指定目录；
+</span></span><span class="line"><span class="cl">--restart always #始终重新启动zookeeper，看需求设置不设置自启动
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加ZooKeeper配置文件，在挂载配置文件目录(/mydata/zookeeper/conf)下，新增zoo.cfg 配置文件，配置内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="nv">dataDir</span><span class="o">=</span>/data  <span class="c1"># 保存zookeeper中的数据</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">clientPort</span><span class="o">=</span><span class="m">2181</span> <span class="c1"># 客户端连接端口，通常不做修改</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">dataLogDir</span><span class="o">=</span>/datalog<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">tickTime</span><span class="o">=</span><span class="m">2000</span>  <span class="c1"># 通信心跳时间</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">initLimit</span><span class="o">=</span><span class="m">5</span>    <span class="c1"># LF(leader - follower)初始通信时限</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">syncLimit</span><span class="o">=</span><span class="m">2</span>    <span class="c1"># LF 同步通信时限</span><span class="err">
+</span></span></span><span class="line"><span class="cl">autopurge.snapRetainCount<span class="o">=</span><span class="m">3</span><span class="err">
+</span></span></span><span class="line"><span class="cl">autopurge.purgeInterval<span class="o">=</span><span class="m">0</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">maxClientCnxns</span><span class="o">=</span><span class="m">60</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="nv">standaloneEnabled</span><span class="o">=</span>true<span class="err">
+</span></span></span><span class="line"><span class="cl">admin.enableServer<span class="o">=</span>true<span class="err">
+</span></span></span><span class="line"><span class="cl">server.1<span class="o">=</span>localhost:2888:3888<span class="p">;</span><span class="m">2181</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>进入容器内部，验证容器状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># 进入zookeeper 容器内部</span><span class="err">
+</span></span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zookeeper /bin/bash<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 检查容器状态</span><span class="err">
+</span></span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zookeeper /bin/bash ./bin/zkServer.sh status<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 进入控制台</span><span class="err">
+</span></span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it zookeeper zkCli.sh<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="zookeeper-javaapi-操作">ZooKeeper JavaAPI 操作</h2>
+<h3 id="curator-介绍">Curator 介绍</h3>
+<p>Curator 是 Apache ZooKeeper 的Java客户端库。
+常见的ZooKeeper Java API ：</p>
+<ul>
+<li>原生Java API</li>
+<li>ZkClient</li>
+<li>Curator</li>
+</ul>
+<p>Curator 项目的目标是简化 ZooKeeper 客户端的使用。
+Curator 最初是 Netfix 研发的,后来捐献了 Apache 基金会,目前是 Apache 的顶级项目。</p>
+<h3 id="curator-api-常用操作">Curator API 常用操作</h3>
+<ol>
+<li>
+<p>建立连接</p>
+<p>引入依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="o">&lt;!--</span><span class="n">curator</span><span class="o">--&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">curator</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">curator</span><span class="o">-</span><span class="n">framework</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="n">4</span><span class="p">.</span><span class="na">0</span><span class="p">.</span><span class="na">0</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">curator</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">curator</span><span class="o">-</span><span class="n">recipes</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="n">4</span><span class="p">.</span><span class="na">0</span><span class="p">.</span><span class="na">0</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建测试类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.curator.RetryPolicy</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.curator.framework.CuratorFramework</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.curator.framework.CuratorFrameworkFactory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.curator.retry.ExponentialBackoffRetry</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CuratorTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="nf">getConnect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * @param connectString         连接字符串，zk server地址和端口 &#34;127.0.0.1:2181&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * @param sessionTimeoutMs      会话超时时间，单位是毫秒ms
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * @param connectionTimeoutMs   连接超时时间，单位是毫秒ms
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * @param retryPolicy           重试策略
+</span></span></span><span class="line"><span class="cl"><span class="cm">         */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        //重试策略
+</span></span></span><span class="line"><span class="cl"><span class="cm">        RetryPolicy retryPolicy = new ExponentialBackoffRetry(3000, 10);
+</span></span></span><span class="line"><span class="cl"><span class="cm">        //第一种方式
+</span></span></span><span class="line"><span class="cl"><span class="cm">        CuratorFramework client = CuratorFrameworkFactory.newClient(&#34;127.0.0.1:2181&#34;, 60 * 1000, 15 * 1000, retryPolicy);
+</span></span></span><span class="line"><span class="cl"><span class="cm">        //开启连接
+</span></span></span><span class="line"><span class="cl"><span class="cm">        client.start();
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//第二种方式,链式创建</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">RetryPolicy</span><span class="w"> </span><span class="n">retryPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackoffRetry</span><span class="p">(</span><span class="n">3000</span><span class="p">,</span><span class="w"> </span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">curatorFramework</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorFrameworkFactory</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">connectString</span><span class="p">(</span><span class="s">&#34;127.0.0.1:2181&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">sessionTimeoutMs</span><span class="p">(</span><span class="n">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">1000</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">connectionTimeoutMs</span><span class="p">(</span><span class="n">15</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">1000</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">retryPolicy</span><span class="p">(</span><span class="n">retryPolicy</span><span class="p">).</span><span class="na">namespace</span><span class="p">(</span><span class="s">&#34;smsService&#34;</span><span class="p">).</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">curatorFramework</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">curatorFramework</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createNode</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//基本创建</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">path</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//带数据的创建</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="s">&#34;jerry_test&#34;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//设置节点类型,临时类型，默认类型持久化</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">().</span><span class="na">withMode</span><span class="p">(</span><span class="n">CreateMode</span><span class="p">.</span><span class="na">EPHEMERAL</span><span class="p">).</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//创建多级节点  /app4/ios</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//creatingParentsIfNeeded,如果父节点不存在则创建父节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">().</span><span class="na">creatingParentsIfNeeded</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus/azeroth&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>删除节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteNode</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//删除单个节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">delete</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//删除带有子节点的节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">delete</span><span class="p">().</span><span class="na">deletingChildrenIfNeeded</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//必须删除成功</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">delete</span><span class="p">().</span><span class="na">guaranteed</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//回调</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">delete</span><span class="p">().</span><span class="na">guaranteed</span><span class="p">().</span><span class="na">inBackground</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BackgroundCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processResult</span><span class="p">(</span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">CuratorEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;被删除了&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}).</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateNode</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//简单修改数据</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">setData</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;sztus_test&#34;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//判断版本信息一致再修改</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Stat</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stat</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">getData</span><span class="p">().</span><span class="na">storingStatIn</span><span class="p">(</span><span class="n">stat</span><span class="p">).</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stat</span><span class="p">.</span><span class="na">getVersion</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">setData</span><span class="p">().</span><span class="na">withVersion</span><span class="p">(</span><span class="n">version</span><span class="p">).</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;sztus_test&#34;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getNode</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//查询数据  get</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">getData</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">bytes</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//查询子节点  ls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">getChildren</span><span class="p">().</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">path</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//查询节点状态信息  ls -s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Stat</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stat</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">getData</span><span class="p">().</span><span class="na">storingStatIn</span><span class="p">(</span><span class="n">stat</span><span class="p">).</span><span class="na">forPath</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;====&#34;</span><span class="w"> </span><span class="o">+</span><span class="n">stat</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Watch事件监听</p>
+<p>ZooKeeper 允许用户在指定节点上注册一些 Watcher，并且在一些特定事件触发的时候，ZooKeeper 服务端会将事件通知到感兴趣的客户端上去，该机制是 ZooKeeper 实现分布式协调服务的重要特性。
+ZooKeeper 中引入了 Watcher 机制来实现了发布/订阅功能能，能够让多个订阅者同时监听某一个对象，当一个对象自身状态变化时，会通知所有订阅者。
+ZooKeeper 原生支持通过注册 Watcher来进行事件监听，但是其使用并不是特别方便
+需要开发人员自己反复注册 Watcher，比较繁琐。
+Curator 引入了 Cache 来实现对 ZooKeeper 服务端事件的监听。</p>
+<ul>
+<li>
+<p>NodeCache：只是监听某一个特点的节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">watchNode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCache</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;/sztus/dolphin&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">Options</span><span class="p">.</span><span class="na">SINGLE_NODE_CACHE</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCacheListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCacheListener</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">forNodeCache</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;node change&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>PathChildrenCache : 监控一个 ZNode 的子节点.，感知不到自己的变化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">watchChildrenNode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">curator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCache</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">curator</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">Options</span><span class="p">.</span><span class="na">SINGLE_NODE_CACHE</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCacheListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCacheListener</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">forPathChildrenCache</span><span class="p">(</span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">curator</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">event</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">curator</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>TreeCache : 可以监控整个树上的所有节点，类似于 PathChildrenCache 和 NodeCache 的组合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">watchChildrenNode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorFramework</span><span class="w"> </span><span class="n">curator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getConnect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCache</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="n">curator</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;/sztus&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">CuratorCache</span><span class="p">.</span><span class="na">Options</span><span class="p">.</span><span class="na">SINGLE_NODE_CACHE</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CuratorCacheListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuratorCacheListener</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">forTreeCache</span><span class="p">(</span><span class="n">curator</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">event</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">curator</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>Zookeeper实现分布式锁</p>
+<p>核心思想：当客户端要获取锁，则创建节点，使用完锁，则删除该节点。</p>
+<ul>
+<li>客户端获取锁时，在 lock 节点下创建临时顺序节点。</li>
+<li>然后获取 lock 下面的所有子节点，客户端获取到所有的子节点之后，如果发现自己创建的子节点序号最小，那么就认为该客户端获取到了锁。使用完锁后，将该节点删除。</li>
+<li>如果发现自己创建的节点并非lock所有子节点中最小的，说明自己还没有获取到锁，此时客户端需要找到比自己小的那个节点，同时对其注册事件监听器，监听删除事件。</li>
+<li>如果发现比自己小的那个节点被删除，则客户端的 Watcher 会收到相应通知，此时再次判断自己创建的节点是否是 lock 子节点中序号最小的，如果是则获取到了锁，如果不是则重复以上步骤继续获取到比自己小的一个节点并注册监听。</li>
+</ul>
+<p>在 Curator 中有五种锁方案：</p>
+<ul>
+<li>InterProcessSemaphoreMutex：分布式排它锁（非可重入锁）</li>
+<li>InterProcessMutex：分布式可重入排它锁</li>
+<li>InterProcessReadWriteLock：分布式读写锁</li>
+<li>InterProcessMultiLock：将多个锁作为单个实体管理的容器</li>
+<li>InterProcessSemaphoreV2：共享信号量</li>
+</ul>
+<p>这里把 Zookeeper 与 Redis 实现分布式锁对比一下：</p>
+<ul>
+<li>优点：ZooKeeper分布式锁（如 InterProcessMutex），除了独占锁、可重入锁，还能实现读写锁，并且可靠性比 Redis 更好。</li>
+<li>缺点：ZooKeeper实现的分布式锁，性能并不太高。因为每次在创建锁和释放锁的过程中，都要动态创建、销毁瞬时节点来实现锁功能。而 ZK 中创建和删除节点只能通过 Leader 服务器来执行，然后 Leader 服务器还需要将数据同不到所有的 Follower 机器上，同步之后才返回，这样频繁的网络通信，性能的短板是非常突出的；而 Redis 则是异步复制。</li>
+</ul>
+<p>Redis 是 AP 架构，而 ZooKeeper 是 CP 架构。在高性能，高并发的场景下，不建议使用ZooKeeper的分布式锁，可以使用 Redis 分布式锁。而由于ZooKeeper的可靠性，所以在并发量不是太高的场景，推荐使用ZooKeeper的分布式锁。</p>
+</li>
+</ol>
+<h2 id="zookeeper服务注册与发现">Zookeeper服务注册与发现</h2>
+<p>更改 pom 文件，增加 Zookeeper 的依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">dependencies</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;!--</span><span class="w">   </span><span class="n">用于读取</span><span class="w"> </span><span class="n">bootstrap</span><span class="p">.</span><span class="na">yml</span><span class="w">   </span><span class="o">--&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">cloud</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">bootstrap</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Sprint</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Web</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="o">--&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Sprint</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="o">--&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">scope</span><span class="o">&gt;</span><span class="n">test</span><span class="o">&lt;/</span><span class="n">scope</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;!--</span><span class="w"> </span><span class="n">SpringBoot整合zookeeper客户端</span><span class="w"> </span><span class="o">--&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">cloud</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">zookeeper</span><span class="o">-</span><span class="n">discovery</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改<code>bootstrap.yml</code>文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 9555表示注册到 zookeeper 服务器的支付服务提供者端口号</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9555</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 服务别名---- 注册 zookeeper 到注册中心名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">application</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cloud-zookeeper-server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">zookeeper</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 如果 zookeeper 是集群，指定多个地址即可：x.x.x.x:2181, y.y.y.y:2181</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">connect-string</span><span class="p">:</span><span class="w"> </span><span class="l">localhost:2181</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="zookeeper的分布式配置中心与监控">Zookeeper的分布式配置中心与监控</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-09-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/zookeeper/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:3473/zookeeper/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:3473/zookeeper/" data-title="认识 Zookeeper"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:3473/zookeeper/" data-title="认识 Zookeeper"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:3473/zookeeper/" data-title="认识 Zookeeper"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/neo4j/" class="prev" rel="prev" title="Neo4j文档"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Neo4j文档</a>
+            <a href="/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="next" rel="next" title="分布式id解决方案">分布式id解决方案<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.153.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">蒋颖</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

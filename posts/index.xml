@@ -1,0 +1,84 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - 蒋颖的世界</title>
+        <link>http://localhost:3473/posts/</link>
+        <description>所有文章 | 蒋颖的世界</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1663402304@qq.com (蒋颖)</managingEditor>
+            <webMaster>1663402304@qq.com (蒋颖)</webMaster><lastBuildDate>Sat, 20 Dec 2025 23:07:06 &#43;0800</lastBuildDate><atom:link href="http://localhost:3473/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>分布式id解决方案</title>
+    <link>http://localhost:3473/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Sat, 20 Dec 2025 23:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[<h2 id="分布式id概述">分布式id概述</h2>
+<p>在我们业务系统数据量不大的时候，单库单表完全可以支撑现有业务，数据再大一点搞个 MySQL 主从同步读写分离也能对付，这时候我们使用数据库自增id就足够了。</p>]]></description>
+</item>
+<item>
+    <title>认识 Zookeeper</title>
+    <link>http://localhost:3473/zookeeper/</link>
+    <pubDate>Thu, 12 Sep 2024 17:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/zookeeper/</guid>
+    <description><![CDATA[<h2 id="初识-zookeeper">初识 Zookeeper</h2>
+<h3 id="zookeeper-概念">ZooKeeper 概念</h3>
+<ul>
+<li>Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。</li>
+<li>Zookeeper 翻译过来就是 动物园管理员，他是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小猪)的管理员。简称zk</li>
+<li>Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。</li>
+<li>Zookeeper 提供的主要功能包括：
+<ul>
+<li>配置管理</li>
+<li>分布式锁</li>
+<li>集群管理</li>
+</ul>
+</li>
+</ul>
+<h3 id="zookeeper-数据模型">Zookeeper 数据模型</h3>
+<p>ZooKeeper 是一个树形目录服务,其数据模型和Unix的文件系统目录树很类似，拥有一个层次化结构。
+这里面的每一个节点都被称为： ZNode，每个节点上都会保存自己的数据和节点信息。
+节点可以拥有子节点，同时也允许少量（1MB）数据存储在该节点之下。
+节点可以分为四大类：</p>]]></description>
+</item>
+<item>
+    <title>Neo4j文档</title>
+    <link>http://localhost:3473/neo4j/</link>
+    <pubDate>Wed, 20 Mar 2024 16:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/neo4j/</guid>
+    <description><![CDATA[<h2 id="特点">特点</h2>
+<p>节点
+节点和关系都包含属性
+关系链接节点
+属性是键值对
+节点用圆圈表示，关系用方向键表示
+关系有方向：单向和双向
+每个关系包含&quot;开始节点&quot;和&quot;到节点&quot;或&quot;结束节点&quot;</p>]]></description>
+</item>
+<item>
+    <title>Kubernetes 的注册中心和配置中心(Etcd))</title>
+    <link>http://localhost:3473/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</link>
+    <pubDate>Fri, 09 Jun 2023 20:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</guid>
+    <description><![CDATA[<h2 id="什么是etcd">什么是ETCD?</h2>
+<p><a href="https://etcd.io/" target="_blank" rel="noopener noreffer "><code>Etcd</code></a>是一个基于<code>go</code>语音实现，用于共享配置和服务发现的分布式储存系统，在分布式系统中提供强一致性、高可用性的功能。它提供了一种可靠的方式来存储需要被分布式系统或机器集群访问的数据。<code>Etcd</code>操作简单，使用<code>Http</code>请求的方式，对数据读取和写入，它将数据存储在分层组织的目录中；并且监听特定的<code>key</code>或者目录，根据需求做出相应的反应。</p>]]></description>
+</item>
+<item>
+    <title>MyBatis 各个框架集成和性能对比</title>
+    <link>http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</link>
+    <pubDate>Thu, 20 Apr 2023 10:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</guid>
+    <description><![CDATA[<p>MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。</p>]]></description>
+</item>
+<item>
+    <title>Redis 多数据源读写分离配置</title>
+    <link>http://localhost:3473/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Sat, 18 Jun 2022 23:07:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:3473/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[<h2 id="概速">概速</h2>
+<p>在现实项目中，我们往往会遇到需要使用多个 Redis 数据源的场景。本文介绍的是一种高度定制化的方案。每个独立的数据源都会使用自己的配置，其中包括针对该数据源的连接池配置。</p>]]></description>
+</item>
+</channel>
+</rss>

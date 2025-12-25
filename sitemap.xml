@@ -1,37 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <sitemap>
-    <loc>http://localhost:9004/en/sitemap.xml</loc>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>http://localhost:9004/ja/sitemap.xml</loc>
-    
-      <lastmod>2020-09-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>http://localhost:9004/zh-cn/sitemap.xml</loc>
-    
-      <lastmod>2020-09-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>http://localhost:9004/zh-tw/sitemap.xml</loc>
-    
-      <lastmod>2020-09-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>http://localhost:9004/ar/sitemap.xml</loc>
-    
-      <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-</sitemapindex>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>http://localhost:3473/posts/</loc><lastmod>2025-12-24T23:07:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:3473/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</loc><lastmod>2025-12-24T23:07:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:3473/</loc><lastmod>2025-12-24T23:07:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:3473/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc><lastmod>2025-12-20T23:07:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:3473/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:3473/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
