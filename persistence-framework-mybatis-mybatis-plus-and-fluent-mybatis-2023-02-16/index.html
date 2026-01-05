@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=11080&amp;path=livereload" data-no-instant defer></script>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=10161&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>MyBatis 各个框架集成和性能对比 - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/">
+        <title>MyBatis 各个框架集成和性能对比 - 蒋颖的世界</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:url" content="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/">
   <meta property="og:site_name" content="蒋颖的世界">
   <meta property="og:title" content="MyBatis 各个框架集成和性能对比">
   <meta property="og:description" content="MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。">
@@ -13,16 +13,16 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2023-04-20T10:07:06+08:00">
     <meta property="article:modified_time" content="2023-04-20T10:07:06+08:00">
-    <meta property="og:image" content="http://localhost:11080/logo.png">
+    <meta property="og:image" content="http://localhost:10161/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:11080/logo.png">
+  <meta name="twitter:image" content="http://localhost:10161/logo.png">
   <meta name="twitter:title" content="MyBatis 各个框架集成和性能对比">
   <meta name="twitter:description" content="MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" /><link rel="prev" href="http://localhost:11080/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/" /><link rel="next" href="http://localhost:11080/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" /><link rel="prev" href="http://localhost:10161/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/" /><link rel="next" href="http://localhost:10161/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -32,9 +32,9 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http:\/\/localhost:11080\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/"
+            "@id": "http:\/\/localhost:10161\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/"
         },"genre": "posts","wordcount":  8817 ,
-        "url": "http:\/\/localhost:11080\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/","datePublished": "2023-04-20T10:07:06+08:00","dateModified": "2023-04-20T10:07:06+08:00","publisher": {
+        "url": "http:\/\/localhost:10161\/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16\/","datePublished": "2023-04-20T10:07:06+08:00","dateModified": "2023-04-20T10:07:06+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -102,7 +102,8 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
+                <div class="container">
+                    <div class="petals-container"></div><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MyBatis 各个框架集成和性能对比</h1><div class="post-meta">
@@ -2726,7 +2727,7 @@
                             <a class="link-to-markdown" href="/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:10161/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/" data-title="MyBatis 各个框架集成和性能对比"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -2743,7 +2744,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">我的世界我做主</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">蒋颖</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">我的世界我做主</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">蒋颖</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
@@ -2753,4 +2754,87 @@
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
         </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+    <style>
+         
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .petal {
+            position: absolute;
+            top: -50px;
+            opacity: 0.7;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(45deg);
+            animation: petal-fall 15s linear infinite;
+        }
+        
+        @keyframes petal-fall {
+            0% {
+                transform: translate(0, -50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(var(--end-x), 100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+    
+    <script>
+        
+        function initPetals(container, count = 400) {
+            for (let i = 0; i < count; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                
+                petal.style.left = Math.random() * 100 + '%';
+                
+                
+                const size = 10 + Math.random() * 10;
+                petal.style.width = size + 'px';
+                petal.style.height = size + 'px';
+                
+                
+                const hue = 300 + Math.random() * 60; 
+                petal.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 85%), hsl(${hue}, 100%, 65%))`;
+                
+                
+                const endX = (Math.random() - 0.5) * 200;
+                const duration = 8 + Math.random() * 10; 
+                const delay = Math.random() * 5;
+                
+                petal.style.setProperty('--end-x', endX + 'px');
+                petal.style.animation = `petal-fall ${duration}s linear ${delay}s infinite`;
+                
+                container.appendChild(petal);
+            }
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container .petals-container');
+            if (container) {
+                initPetals(container, 400);
+            }
+        });
+    </script>
 </html>
