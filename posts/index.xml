@@ -1,24 +1,74 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - 蒋颖的世界</title>
-        <link>http://localhost:11080/posts/</link>
+        <link>http://localhost:1313/posts/</link>
         <description>所有文章 | 蒋颖的世界</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1663402304@qq.com (蒋颖)</managingEditor>
-            <webMaster>1663402304@qq.com (蒋颖)</webMaster><lastBuildDate>Sat, 20 Dec 2025 23:07:06 &#43;0800</lastBuildDate><atom:link href="http://localhost:11080/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1663402304@qq.com (蒋颖)</webMaster><lastBuildDate>Thu, 15 Jan 2026 15:57:00 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>JVM类加载机制</title>
+    <link>http://localhost:1313/jvm%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</link>
+    <pubDate>Thu, 15 Jan 2026 15:57:00 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:1313/jvm%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</guid>
+    <description><![CDATA[<h2 id="jvm类加载机制">JVM类加载机制</h2>
+<h3 id="类加载步骤">类加载步骤</h3>
+<p>JVM 采用的是懒加载机制，即只有类在被使用时才加载。类的加载主要可分为以下几步：</p>
+<p>**加载：**即把类字节码文件加载到内存，在一步会在内存中生成一个代表这个类的<code>java.lang.Class</code>对象，作为方法区这个类的各种数据的访问入口。</p>]]></description>
+</item>
+<item>
+    <title>JUC</title>
+    <link>http://localhost:1313/juc/</link>
+    <pubDate>Mon, 05 Jan 2026 15:57:00 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:1313/juc/</guid>
+    <description><![CDATA[<h2 id="juc-概述">JUC 概述</h2>
+<h3 id="juc是什么">JUC是什么？</h3>
+<p>在 Java 5.0 提供了 <code>java.util.concurrent</code>(简称 JUC )包，在此包中增加了在并发编程中很常用的工具类。此包包括了几个小的、已标准化的可扩展框架，并提供一些功能实用的类，没有这些类，一些功能会很难实现或实现起来冗长乏味。</p>]]></description>
+</item>
+<item>
+    <title>布隆过滤器</title>
+    <link>http://localhost:1313/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</link>
+    <pubDate>Mon, 29 Dec 2025 21:30:00 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:1313/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</guid>
+    <description><![CDATA[<h2 id="布隆过滤器">布隆过滤器</h2>
+<h3 id="什么是布隆过滤器">什么是布隆过滤器</h3>
+<p>布隆过滤器（Bloom Filter）是1970年由布隆提出的，它由**二进制向量和一系列随机映射函数（哈希函数）**两部分组成。</p>
+<p>优点：</p>
+<ul>
+<li>可以高效地进行查询，可以用来告诉你“某样东西一定不存在或者可能存在”</li>
+<li>可以高效的进行插入</li>
+<li>保密性强，布隆过滤器不存储元素本身</li>
+<li>相比于传统的List、Set、Map等数据结构，它占用空间更少，因为其本身并不存储任何数据</li>
+</ul>
+<p>缺点：</p>]]></description>
+</item>
+<item>
+    <title>Git 配置 SSH VPN</title>
+    <link>http://localhost:1313/git%E9%85%8D%E7%BD%AEssh-vpn/</link>
+    <pubDate>Fri, 26 Dec 2025 18:44:06 &#43;0800</pubDate>
+    <author>蒋颖</author>
+    <guid>http://localhost:1313/git%E9%85%8D%E7%BD%AEssh-vpn/</guid>
+    <description><![CDATA[<p>在软件开发过程中，频繁与 GitHub 交互是常态。然而，这些工具的连接不稳定往往让人困扰。</p>
+<h2 id="git-代理设置">Git 代理设置</h2>
+<p>Git 与 GitHub 仓库的连接主要通过两种协议进行：HTTPS 和 SSH。</p>
+<p>首先，让我们来设置 Git 的 HTTPS 代理。</p>]]></description>
+</item>
+<item>
     <title>分布式id解决方案</title>
-    <link>http://localhost:11080/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+    <link>http://localhost:1313/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
     <pubDate>Sat, 20 Dec 2025 23:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+    <guid>http://localhost:1313/%E5%88%86%E5%B8%83%E5%BC%8Fid%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
     <description><![CDATA[<h2 id="分布式id概述">分布式id概述</h2>
 <p>在我们业务系统数据量不大的时候，单库单表完全可以支撑现有业务，数据再大一点搞个 MySQL 主从同步读写分离也能对付，这时候我们使用数据库自增id就足够了。</p>]]></description>
 </item>
 <item>
     <title>认识 Zookeeper</title>
-    <link>http://localhost:11080/zookeeper/</link>
+    <link>http://localhost:1313/zookeeper/</link>
     <pubDate>Thu, 12 Sep 2024 17:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/zookeeper/</guid>
+    <guid>http://localhost:1313/zookeeper/</guid>
     <description><![CDATA[<h2 id="初识-zookeeper">初识 Zookeeper</h2>
 <h3 id="zookeeper-概念">ZooKeeper 概念</h3>
 <ul>
@@ -41,10 +91,10 @@
 </item>
 <item>
     <title>Neo4j文档</title>
-    <link>http://localhost:11080/neo4j/</link>
+    <link>http://localhost:1313/neo4j/</link>
     <pubDate>Wed, 20 Mar 2024 16:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/neo4j/</guid>
+    <guid>http://localhost:1313/neo4j/</guid>
     <description><![CDATA[<h2 id="特点">特点</h2>
 <p>节点
 节点和关系都包含属性
@@ -56,27 +106,27 @@
 </item>
 <item>
     <title>Kubernetes 的注册中心和配置中心(Etcd))</title>
-    <link>http://localhost:11080/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</link>
+    <link>http://localhost:1313/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</link>
     <pubDate>Fri, 09 Jun 2023 20:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</guid>
+    <guid>http://localhost:1313/kubernetes%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83etcd/</guid>
     <description><![CDATA[<h2 id="什么是etcd">什么是ETCD?</h2>
 <p><a href="https://etcd.io/" target="_blank" rel="noopener noreffer "><code>Etcd</code></a>是一个基于<code>go</code>语音实现，用于共享配置和服务发现的分布式储存系统，在分布式系统中提供强一致性、高可用性的功能。它提供了一种可靠的方式来存储需要被分布式系统或机器集群访问的数据。<code>Etcd</code>操作简单，使用<code>Http</code>请求的方式，对数据读取和写入，它将数据存储在分层组织的目录中；并且监听特定的<code>key</code>或者目录，根据需求做出相应的反应。</p>]]></description>
 </item>
 <item>
     <title>MyBatis 各个框架集成和性能对比</title>
-    <link>http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</link>
+    <link>http://localhost:1313/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</link>
     <pubDate>Thu, 20 Apr 2023 10:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</guid>
+    <guid>http://localhost:1313/persistence-framework-mybatis-mybatis-plus-and-fluent-mybatis-2023-02-16/</guid>
     <description><![CDATA[<p>MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。本文章主要是讲述如何集成 MyBatis 及其扩展框架，清楚地讲述 Mybatis、Mybatis Plus 和 Fluent MyBatis 的 CRUD 操作。最后将三者的使用性能做了一个对比，在实际开发过程中，建议使用原生的 MyBatis，具有较强的扩展性，并且其性能较高；当然，如果你追求高效的开发效率，建议使用 MyBatis Plus。</p>]]></description>
 </item>
 <item>
     <title>Redis 多数据源读写分离配置</title>
-    <link>http://localhost:11080/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</link>
+    <link>http://localhost:1313/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</link>
     <pubDate>Sat, 18 Jun 2022 23:07:06 &#43;0800</pubDate>
     <author>蒋颖</author>
-    <guid>http://localhost:11080/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</guid>
+    <guid>http://localhost:1313/redis-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE/</guid>
     <description><![CDATA[<h2 id="概速">概速</h2>
 <p>在现实项目中，我们往往会遇到需要使用多个 Redis 数据源的场景。本文介绍的是一种高度定制化的方案。每个独立的数据源都会使用自己的配置，其中包括针对该数据源的连接池配置。</p>]]></description>
 </item>
